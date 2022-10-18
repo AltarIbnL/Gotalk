@@ -32,7 +32,7 @@ func SetupRouter(mode string) *gin.Engine {
 
 	{
 		// 因为是装在wsl里面，虚拟机的ip地址会开机一次重启一次，所以每次都得重新输入
-		v1.GET("/community", controller.CommunityHandler)
+		v1.GET("/community", controller.CommunityHandler, middlewares.RateLimitMiddleware(1*time.Second, 2))
 		v1.GET("/community/:id", controller.CommunityDetailHandler)
 
 		v1.POST("/post", controller.CreatePostHandler)

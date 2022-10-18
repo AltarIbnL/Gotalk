@@ -47,10 +47,11 @@ func Login(p *models.ParamLogin) (user *models.User, err error) {
 		return nil, err
 	}
 	// 生成JWT
-	token, err := jwt.GenToken(user.UserID, user.Username)
+	token, rtoken, err := jwt.GenToken(user.UserID, user.Username)
 	if err != nil {
 		return
 	}
 	user.Token = token
+	user.Rtoken = rtoken
 	return
 }
